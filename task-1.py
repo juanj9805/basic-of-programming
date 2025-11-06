@@ -1,3 +1,5 @@
+import time
+
 # 1. Panadería de Don Pancho — Descuentos por cantidades
 
 # La panadería de Don Pancho vende pan a $300 cada uno.
@@ -11,6 +13,8 @@
 # Calcular y mostrar el total.
 
 # MY VERSION
+
+sales = {}
 
 priceBread = 300
 
@@ -28,7 +32,14 @@ def totalBreads (amount,priceBread):
         total = amount*priceBread
         return total
 
-print(totalBreads(0,priceBread))
+# Id generator 
+
+def random_id_generator ():
+    return str(int(time.time()))
+
+sales[random_id_generator()] = totalBreads(21,priceBread)
+
+print(sales)
 
 
 # CHATGPT VERSION
@@ -46,7 +57,9 @@ def totalBreads(amount, priceBread):
         total = amount * priceBread
     return f"Total a pagar: ${total:,.0f}"
 
-print(totalBreads(0, priceBread))
+# print(totalBreads(0, priceBread))
+
+
 
 # SUMMARY OF IMPROVEMENTS
 
