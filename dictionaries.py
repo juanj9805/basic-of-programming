@@ -76,7 +76,7 @@ def add_discount (discount):
     finally:
         print("Transaction succed")
 
-print(add_discount(ADD_DISCOUNT))
+# print(add_discount(ADD_DISCOUNT))
 
 # CHATGPT VERSION
 
@@ -127,7 +127,7 @@ def add_discount(discount):
         "✅ Transaction successful!"
     )
 
-print(add_discount(ADD_DISCOUNT))
+# print(add_discount(ADD_DISCOUNT))
 
 # SUMMARY OF IMPROVEMENTS
 
@@ -135,6 +135,9 @@ print(add_discount(ADD_DISCOUNT))
 # | -------------------------------- | -------------------------------- | --------------------------------- |
 # | Used `finally` incorrectly       | Moved success message outside    | Prevents false “success” messages |
 # | Used tuple instead of dictionary | Returned dictionary              | Improves readability              |
-# | Discount threshold incorrect     | Updated to 2000                  | Matches exercise requirement      |
 # | Output unclear                   | Added formatted multiline output | Makes summary user-friendly       |
 # | No return on exception           | Added `return None`              | Prevents crashes                  |
+
+
+
+
