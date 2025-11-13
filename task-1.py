@@ -1,72 +1,77 @@
-import time
-
-# 1. Panadería de Don Pancho — Descuentos por cantidades
-
-# La panadería de Don Pancho vende pan a $300 cada uno.
-
-# Reglas:
-
-#     Si compra más de 20 panes → 10% descuento
-#     Si compra más de 50 panes → 20% descuento
-#     Si ingresa una cantidad negativa, mostrar "Cantidad inválida"
-
-# Calcular y mostrar el total.
-
 # MY VERSION
 
-sales = {}
+products_quantity = int(input("How many products do you want to register: "))
+products = []
 
-priceBread = 300
 
-def totalBreads (amount,priceBread):
+def products_register(quantity):
 
-    if amount <=0:
-        return "Something went wrong"
-    elif amount>20 and amount<50:
-        total = (amount*priceBread)*0.9
-        return total
-    elif amount>50:
-        total = (amount*priceBread)*0.8
-        return total
-    else:
-        total = amount*priceBread
-        return total
+    for product in range(quantity):
+        name =  input("Product name: ")
+        quantity =  int(input("Product quantity: "))
+        price =  int(input("Product price: "))
+        expired =  input("Is it expired?: ")
 
-# Id generator 
+        print(products)
+        
+        product_info =  {
+            "name": name,
+            "quantity": quantity,
+            "price": price,
+            "expired": expired,
+        }
+        products.append(product_info)
 
-def random_id_generator ():
-    return str(int(time.time()))
 
-sales[random_id_generator()] = totalBreads(21,priceBread)
+print(products_register(products_quantity))
 
-print(sales)
+# Total 
+
 
 
 # CHATGPT VERSION
 
-priceBread = 300
+def products_register(quantity):
+    products = []
+    for i in range(quantity):
+        try:
+            name = input(f"Product {i + 1} name: ")
+            product_quantity = int(input("Product quantity: "))
+            price = int(input("Product price: "))
+            expired = input("Is it expired? (yes/no): ")
 
-def totalBreads(amount, priceBread):
-    if amount <= 0:
-        return "Cantidad inválida"
-    elif amount > 50:
-        total = amount * priceBread * 0.8
-    elif amount > 20:
-        total = amount * priceBread * 0.9
-    else:
-        total = amount * priceBread
-    return f"Total a pagar: ${total:,.0f}"
+            product_info = {
+                "name": name,
+                "quantity": product_quantity,
+                "price": price,
+                "expired": expired.lower()
+            }
 
-# print(totalBreads(0, priceBread))
+            products.append(product_info)
+
+        except ValueError:
+            print("Please enter valid numbers for quantity and price.")
+
+    return products
 
 
+products_quantity = int(input("How many products do you want to register: "))
+products = products_register(products_quantity)
 
-# SUMMARY OF IMPROVEMENTS
+print("\nRegistered products:")
+print(products)
 
-# | Aspect                | Your version                     | Improved version               |
-# | --------------------- | -------------------------------- | ------------------------------ |
-# | Handles all cases     | Missing 1–20 range               | Covers all cases           |
-# | Error message         | “Something went wrong” (generic) | “Cantidad inválida” (specific) |
-# | Condition readability | Redundant `> 20 and < 50`        | Simpler, ordered logic         |
-# | Output formatting     | Plain number                     | Formatted as money             |
-# | Return value safety   | Can return `None`                | Always returns a string        |
+
+# print(products_register())
+
+
+# SUMMMARY OF IMPROVEMENTS
+
+# | **Problem**                                                 | **Fix**                                                                     | **Why**                                                                                  |
+# | ----------------------------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+# | The function **doesn’t return anything**                    | Add `return products` at the end of the function                            | Without a `return`, `print(products_register(...))` prints `None`                        |
+# | You’re using the global list `products` inside the function | Create a **local list** inside the function (`products = []`) and return it | Avoids side effects and makes the function reusable                                      |
+# | You’re printing `products` **inside the loop**              | Move the `print(products)` line **after** the loop, or remove it            | Printing in every iteration can clutter the console and isn’t necessary for final output |
+# | Variable name `quantity` is reused inside the loop          | Rename the inner variable to `product_quantity`                             | Avoids overwriting the function parameter and prevents confusion                         |
+# | No input validation or error handling                       | Wrap conversions (`int(input(...))`) in a `try/except ValueError`           | Prevents program crashes if the user types non-numeric input                             |
+# | Global variable `products_quantity` is defined outside      | Pass it directly as a parameter to keep function independent                | Increases flexibility and reduces reliance on global state                               |
