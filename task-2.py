@@ -1,28 +1,31 @@
 # MY VERSION 
+from helpers import input_quantity_info, ID_generator, input_name
 
-moovies_quantity = int(input("How many moovies are there: "))
 moovies = []
 
 def register_moovie(quantity):
     try:
+        moovies_info = []
         for movie in range(quantity):
-            title = input("movie title: ")
             duration = int(input("movie duration: "))
             moovie_info = {
-                "title" : title,
+                "ID" : ID_generator(),
+                "title" : input_name("Title"),
                 "duration" : duration,
             }
             moovies.append(moovie_info)
     except ValueError:
         print("Enter a valid input")
+    return moovies_info
 
-register_moovie(moovies_quantity)
+print(register_moovie(input_quantity_info("moovies")))
 
-long = []
-medium = []
-short = []
+register_moovie(input_quantity_info("Moovies"))
 
 def moovie_clasification(moovies):
+    long = []
+    medium = []
+    short = []
     try:
         for movie in moovies:
             if movie["duration"] >= 150:
@@ -33,54 +36,57 @@ def moovie_clasification(moovies):
                 short.append(movie)
     except ValueError:
         print("Enter a valid input")        
+    return [long,medium,short]
 
-moovie_clasification(moovies)
+print(f"whole array {moovies}")
+
+print(moovie_clasification(moovies))
 
 # CHATGPT VERSION
 
-def register_movies(quantity):
-    movies = []
-    for i in range(quantity):
-        try:
-            title = input(f"Movie {i + 1} title: ")
-            duration = int(input("Movie duration (in minutes): "))
-            movie_info = {"title": title, "duration": duration}
-            movies.append(movie_info)
-        except ValueError:
-            print("Please enter a valid number for duration.")
-    return movies
+# def register_movies(quantity):
+#     movies = []
+#     for i in range(quantity):
+#         try:
+#             title = input(f"Movie {i + 1} title: ")
+#             duration = int(input("Movie duration (in minutes): "))
+#             movie_info = {"title": title, "duration": duration}
+#             movies.append(movie_info)
+#         except ValueError:
+#             print("Please enter a valid number for duration.")
+#     return movies
 
 
-def classify_movies(movies):
-    categories = {"short": [], "medium": [], "long": []}
+# def classify_movies(movies):
+#     categories = {"short": [], "medium": [], "long": []}
 
-    for movie in movies:
-        duration = movie["duration"]
-        if duration >= 150:
-            categories["long"].append(movie)
-        elif duration >= 100:
-            categories["medium"].append(movie)
-        else:
-            categories["short"].append(movie)
+#     for movie in movies:
+#         duration = movie["duration"]
+#         if duration >= 150:
+#             categories["long"].append(movie)
+#         elif duration >= 100:
+#             categories["medium"].append(movie)
+#         else:
+#             categories["short"].append(movie)
 
-    return categories
-
-
-def main():
-    try:
-        quantity = int(input("How many movies are there: "))
-        movies = register_movies(quantity)
-        classified = classify_movies(movies)
-
-        print("\nShort movies:", classified["short"])
-        print("Medium movies:", classified["medium"])
-        print("Long movies:", classified["long"])
-    except ValueError:
-        print("Please enter a valid number for quantity.")
+#     return categories
 
 
-if __name__ == "__main__":
-    main()
+# def main():
+#     try:
+#         quantity = int(input("How many movies are there: "))
+#         movies = register_movies(quantity)
+#         classified = classify_movies(movies)
+
+#         print("\nShort movies:", classified["short"])
+#         print("Medium movies:", classified["medium"])
+#         print("Long movies:", classified["long"])
+#     except ValueError:
+#         print("Please enter a valid number for quantity.")
+
+
+# if __name__ == "__main__":
+#     main()
 
 # SUMMARY OF FEEDBACK
 
